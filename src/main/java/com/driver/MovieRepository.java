@@ -1,20 +1,22 @@
 package com.driver;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class MovieRepository {
 
-    Map<String,Movie> MovieMap = new HashMap<>() ;
+    private Map<String,Movie> MovieMap = new HashMap<>() ;
 
-    Map<String,Director> DirectorMap = new HashMap<>() ;
+    private Map<String,Director> DirectorMap = new HashMap<>() ;
 
 
-    Map<String,String> DMPair = new HashMap<>() ;
+    private Map<String,String> DMPair = new HashMap<>() ;
     public String addMovie(Movie movie) {
         MovieMap.put(movie.name,movie) ;
 
