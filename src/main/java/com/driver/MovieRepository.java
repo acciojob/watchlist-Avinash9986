@@ -15,52 +15,52 @@ public class MovieRepository {
 
 
     Map<String,String> DMPair = new HashMap<>() ;
-    public ResponseEntity<String> addMovie(Movie movie) {
+    public String addMovie(Movie movie) {
         MovieMap.put(movie.name,movie) ;
 
-        return ResponseEntity.ok("success") ;
+        return "success" ;
     }
 
-    public ResponseEntity<String> addDirector(Director director) {
+    public String addDirector(Director director) {
         DirectorMap.put(director.name,director) ;
-        return ResponseEntity.ok("success") ;
+        return "success" ;
     }
 
 
-    public ResponseEntity<Movie> getMovieByName(String name) {
-        return ResponseEntity.ok(MovieMap.get(name)) ;
+    public Movie getMovieByName(String name) {
+        return MovieMap.get(name);
     }
 
-    public ResponseEntity<Director> getDirectorByName(String name) {
-        return ResponseEntity.ok(DirectorMap.get(name)) ;
+    public Director getDirectorByName(String name) {
+        return DirectorMap.get(name) ;
     }
 
-    public ResponseEntity<String> addMovieDirectorPair(String movieName, String directorName) {
+    public String addMovieDirectorPair(String movieName, String directorName) {
         if(MovieMap.containsKey(movieName) && DirectorMap.containsKey(directorName)){
             DMPair.put(directorName,movieName) ;
         }
-        return ResponseEntity.ok("success") ;
+        return "success" ;
     }
 
-    public ResponseEntity<List<String>> getMoviesByDirectorName(String director) {
+    public List<String> getMoviesByDirectorName(String director) {
         List<String> ans = new ArrayList<>() ;
         for(String dir: DMPair.keySet()){
             if(dir == director){
                 ans.add(DMPair.get(dir)) ;
             }
         }
-        return ResponseEntity.ok(ans) ;
+        return ans ;
     }
 
-    public ResponseEntity<List<String>> findAllMovies() {
+    public List<String> findAllMovies() {
         List<String> ans = new ArrayList<>() ;
         for(String mov : MovieMap.keySet()){
             ans.add(mov) ;
         }
-        return ResponseEntity.ok(ans) ;
+        return ans ;
     }
 
-    public ResponseEntity<String> deleteDirectorByName(String director) {
+    public String deleteDirectorByName(String director) {
         for (String dir : DirectorMap.keySet()){
             if(dir == director){
                 DirectorMap.remove(dir) ;
@@ -71,10 +71,10 @@ public class MovieRepository {
                 DMPair.remove(dir) ;
             }
         }
-        return ResponseEntity.ok("success") ;
+        return "success" ;
     }
 
-    public ResponseEntity<String> deleteAllDirectors() {
+    public String deleteAllDirectors() {
         for (String dir : DirectorMap.keySet()){
             if(DMPair.containsKey(dir)){
                 DMPair.remove(dir) ;
@@ -88,6 +88,6 @@ public class MovieRepository {
             DMPair.remove(dir) ;
 
         }
-        return ResponseEntity.ok("success") ;
+        return "success" ;
     }
 }
